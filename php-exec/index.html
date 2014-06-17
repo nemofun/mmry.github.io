@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>PHP调用外部命令 —— 关于返回状态码 | 明明如月</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="明明如月">
+  
+  
+    <meta name="description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
+因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
+因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
+  
+  <meta name="description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
+因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
+因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP调用外部命令 —— 关于返回状态码">
+<meta property="og:url" content="http://mmry.info/php-exec/">
+<meta property="og:site_name" content="明明如月">
+<meta property="og:description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
+因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
+因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP调用外部命令 —— 关于返回状态码">
+<meta name="twitter:description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
+因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
+因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
+  
+    <link rel="alternate" href="/atom.xml" title="明明如月" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href='http://fonts.useso.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.useso.com/css?family=VT323' rel='stylesheet' type='text/css'>
+  <script src="/js/jquery.min.js"></script>
+  
+  <meta name="baidu-site-verification" content="SIyWHrnlr3" />
+</head>
+<body>
+    <div id="ourlove">
+  <div id="author">
+      <a href="/"></a>
+    </div>
+    <div id="love">
+        We have been in love for
+        <div id="timer">
+            <span id="days">00</span>days
+            <span id="hours">00</span>hours
+            <span id="minutes">00</span>minutes
+            <span id="seconds">00</span>seconds
+        </div>
+    </div>
+</div>
+    <div class="content">
+    	<article class="title">
+  <header>
+    
+  
+    <h1 class="title">PHP调用外部命令 —— 关于返回状态码</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，<a href="https://github.com/izyn/aircanada-reptile" target="_blank" rel="external">传送门</a>。</p>
+<p>因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。</p>
+<p>因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方式无疑比较适合。PHP提供共了3个专门的执行外部命令的函数：<code>system()</code>，<code>exec()</code>，<code>passthru()</code>。这三个函数的用法大同小异，他们都可以获取命令执行的状态码，差别在于有无结果输出和输出方式上面，在此不一一列举。<br><a id="more"></a><br>在此想讨论的是php调用外部命令的权限问题以及nodejs的模块载入。</p>
+<p>通常情况下，在linux服务器环境下，执行php程序的用户组不会是root，基于选择的服务器或者配置的不同会有差异，比如笔者服务器上面是www这个用户，关于这一点，可以通过如下的php程序进行验证：</p>
+<pre><code><span class="php"><span class="preprocessor">&lt;?php</span>
+    exec(<span class="string">'id -a'</span>, <span class="variable">$res</span>, <span class="variable">$rc</span>);
+    print_r(<span class="variable">$res</span>);
+<span class="preprocessor">?&gt;</span></span>
+</code></pre><p>在浏览器运行即可看到当前执行php程序的用户的相关信息。那么我们在执行一个外部命令调用时如何判断是由于何种原因导致的执行失败呢，这时候就要用到状态码了。</p>
+<p>shell中每个命令都使用退出状态码（exit status）来告诉shell它完成了处理，退出状态码范围为[0,255]，命令结束运行时由命令传给shell，可以捕获并使用</p>
+<pre><code><span class="variable">$ </span>date aaaaaa
+<span class="variable">$ </span>echo <span class="variable">$?</span>
+<span class="variable">$ </span>nothingnothingnothing
+<span class="variable">$ </span>echo <span class="variable">$?</span>
+</code></pre><ul>
+<li>0    命令成功结束</li>
+<li>1    通用未知错误</li>
+<li>2    误用shell命令</li>
+<li>126    命令不可执行</li>
+<li>127    没找到命令</li>
+<li>128    无效退出参数</li>
+<li>128+x    Linux信号x的严重错误</li>
+<li>130    命令通过ctrl+c终止</li>
+<li>255    退出状态码越界</li>
+</ul>
+<p>当通过状态码获知是由于权限问题而导致无法执行命令时（通常状态码为126），我们就可以针对权限问题对代码进行调整。通常情况下，如果是调用我们自己写的程序而非linux系统指令，我们优先考虑为目标程序赋予php程序调用的权限，如使用类似的指令：<code>chown www:www &lt;target&gt;</code>。在这条路走不通的情况下我们才考虑将执行php用户加入<code>sudoers</code>或者其他方案，<a href="http://blog.csdn.net/ws_zll/article/details/7721479" target="_blank" rel="external">参考链接</a>。注：<code>网上也有通过写c语言程序，然后通过调用c语言程序来达到调用外部命令的案例</code>。</p>
+<p>另，关于在php中调用node命令时，需注意通过npm安装的模块（即<code>node_modules</code>）需在目标程序当前目录下，通过<code>npm install -g &lt;modules&gt;</code>安装的模块需要指定环境变量。</p>
+
+    
+  </div>
+  <footer>
+    
+      <div class="post-meta">
+        <span>
+  <time datetime="2014-06-17T09:43:31.000Z">
+    2014年06月17日
+  </time>
+</span>
+        @
+        
+  <span class="categories">
+    <a class="categories-link" href="/categories/technique/">technique</a>
+  </span>
+
+      </div>
+    
+  </footer>
+  <hr class="divider">
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="PHP调用外部命令 —— 关于返回状态码">
+  </div>
+</section>
+
+  		<div class="footer">
+	<p>© 2013-2014. All rights reserved.</p>
+	<p>Our-love by <a href="http://mmry.info">mmry.info</a>,Power by <a href="http://hexo.io">hexo</a></p>
+</div>
+  	</div>
+  <script src="/js/main.js"></script>
+<script type="text/javascript">
+  $(function($) {
+    setInterval("timer()",1000);
+  });
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'mmruy' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+</body>
+</html>
