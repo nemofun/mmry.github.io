@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>nodejs错误:socket hang up | 明明如月</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="明明如月">
+  
+  
+    <meta name="description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
+今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
+  
+  <meta name="description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
+今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs错误:socket hang up">
+<meta property="og:url" content="http://mmry.info/nodejs-socket-hang-up/">
+<meta property="og:site_name" content="明明如月">
+<meta property="og:description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
+今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs错误:socket hang up">
+<meta name="twitter:description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
+今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
+  
+    <link rel="alternate" href="/atom.xml" title="明明如月" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href='http://fonts.useso.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.useso.com/css?family=VT323' rel='stylesheet' type='text/css'>
+  <script src="/js/jquery.min.js"></script>
+  
+  <meta name="baidu-site-verification" content="SIyWHrnlr3" />
+</head>
+<body>
+    <div id="ourlove">
+  <div id="author">
+      <a href="/"></a>
+    </div>
+    <div id="love">
+        We have been in love for
+        <div id="timer">
+            <span id="days">00</span>days
+            <span id="hours">00</span>hours
+            <span id="minutes">00</span>minutes
+            <span id="seconds">00</span>seconds
+        </div>
+    </div>
+</div>
+    <div class="content">
+    	<article class="post">
+  <header>
+    
+  
+    <h1 class="title">nodejs错误:socket hang up</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="http://www.nodejs.org/" target="_blank" rel="external">node.js</a>中http请求里难免会出现<code>socket hang up</code>异常，此异常都是因为在<code>socket end</code>或者<code>close</code>的时候还没有接受到服务器端响应，所以属于req的异常。</p>
+<p>今天在练手一个node-webkit的项目时，<code>http.get</code>操作返回<code>socket hang up</code>错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式，同样会爆出这个错误，最终我为链接添加了header后终于正常了。<br><a id="more"></a></p>
+<pre><code><span class="typedef"><span class="keyword">data</span>.headers = <span class="container">{
+    '<span class="type">Content</span>-<span class="type">Type</span>': '<span class="title">application</span>/<span class="title">x</span>-<span class="title">www</span>-<span class="title">form</span>-<span class="title">urlencoded'</span>,
+    '<span class="type">Referer</span>':'<span class="title">http</span>://<span class="title">music</span>.<span class="title">baidu</span>.<span class="title">com</span>/',
+    '<span class="type">Accept</span>-<span class="type">Language</span>':'<span class="title">en</span>-<span class="type">US</span>,<span class="title">en</span>;<span class="title">q</span>=0.8,<span class="title">zh</span>-<span class="type">CN</span>;<span class="title">q</span>=0.6,<span class="title">zh</span>;<span class="title">q</span>=0.4,<span class="title">zh</span>-<span class="type">TW</span>;<span class="title">q</span>=0.2',
+    '<span class="type">Cache</span>-<span class="type">Control</span>':'<span class="title">max</span>-<span class="title">age</span>=0',
+    '<span class="type">Connection</span>':'<span class="title">keep</span>-<span class="title">alive'</span>,
+    '<span class="type">Accept</span>':'<span class="title">text</span>/<span class="title">html</span>,<span class="title">application</span>/<span class="title">xhtml</span>+<span class="title">xml</span>,<span class="title">application</span>/<span class="title">xml</span>;<span class="title">q</span>=0.9,<span class="title">image</span>/<span class="title">webp</span>,*/*;<span class="title">q</span>=0.8'
+}</span></span>
+</code></pre><p>开始我想是否是对方的一些校验性规则在防止爬虫爬取，但是我觉得就算不能通过校验拒绝访问，这种情况应该是返回4x或5x状态码，不知为何会是导致程序报错。目前来说对于nodejs完全是应用成面上的了解，很多深入和核心的东西完全陌生，特此记录，留待以后验证。</p>
+
+    
+  </div>
+  <footer>
+    
+      <div class="post-meta">
+        <span>
+  <time datetime="2014-10-13T15:24:44.000Z">
+    2014年10月13日
+  </time>
+</span>
+        @
+        
+  <span class="categories">
+    <a class="categories-link" href="/categories/technique/">technique</a>
+  </span>
+
+      </div>
+    
+  </footer>
+  <hr class="divider">
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="nodejs错误:socket hang up">
+  </div>
+</section>
+
+  		<div class="footer">
+	<p>© 2013-2014. All rights reserved.</p>
+	<p>Our-love by <a href="http://mmry.info">mmry.info</a>,Power by <a href="http://hexo.io">hexo</a></p>
+</div>
+  	</div>
+  <script src="/js/main.js"></script>
+<script type="text/javascript">
+  $(function($) {
+    setInterval("timer()",1000);
+  });
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'mmruy' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+</body>
+</html>

@@ -61,6 +61,43 @@
 
 
   
+    <article class="post">
+  <header>
+    
+  
+    <h1 class="title"><a href="/nodejs-socket-hang-up/">nodejs错误:socket hang up</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="http://www.nodejs.org/" target="_blank" rel="external">node.js</a>中http请求里难免会出现<code>socket hang up</code>异常，此异常都是因为在<code>socket end</code>或者<code>close</code>的时候还没有接受到服务器端响应，所以属于req的异常。</p>
+<p>今天在练手一个node-webkit的项目时，<code>http.get</code>操作返回<code>socket hang up</code>错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式，同样会爆出这个错误，最终我为链接添加了header后终于正常了。<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      <div class="post-meta">
+        <span>
+  <time datetime="2014-10-13T15:24:44.000Z">
+    2014年10月13日
+  </time>
+</span>
+        @
+        
+  <span class="categories">
+    <a class="categories-link" href="/categories/technique/">technique</a>
+  </span>
+
+      </div>
+    
+  </footer>
+  <hr class="divider">
+</article>
+
+
+  
     <article class="title">
   <header>
     
