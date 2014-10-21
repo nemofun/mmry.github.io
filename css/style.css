@@ -19,6 +19,10 @@ p {
   line-height: 25px;
   color: #555;
 }
+ul,
+li {
+  list-style: none;
+}
 #header {
   width: 750px;
   margin: 0 auto;
@@ -74,4 +78,22 @@ article {
   color: #999;
   font-weight: 600;
   font-size: 12px;
+}
+.year {
+  width: 60px;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.month {
+  margin-left: 90px;
+  margin-top: -35px;
+  border-left: 1px solid #ddd;
+}
+.month li {
+  line-height: 30px;
+}
+.month li time {
+  font-size: 16px;
+  margin-right: 25px;
 }
