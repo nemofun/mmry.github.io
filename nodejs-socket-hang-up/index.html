@@ -7,24 +7,12 @@
   <title>nodejs错误:socket hang up | 明明如月</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-    <meta name="author" content="明明如月">
+    <meta name="author" content="明明如月:chao507@vip.qq.com">
   
   
     <meta name="description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
 今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
   
-  <meta name="description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
-今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
-<meta property="og:type" content="article">
-<meta property="og:title" content="nodejs错误:socket hang up">
-<meta property="og:url" content="http://mmry.info/nodejs-socket-hang-up/">
-<meta property="og:site_name" content="明明如月">
-<meta property="og:description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
-今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs错误:socket hang up">
-<meta name="twitter:description" content="node.js中http请求里难免会出现socket hang up异常，此异常都是因为在socket end或者close的时候还没有接受到服务器端响应，所以属于req的异常。
-今天在练手一个node-webkit的项目时，http.get操作返回socket hang up错误，社区里有人说这种情况通常是链接未关闭造成的，但是get操作是一个会自动关闭的操作。我试着改为采用request的方式">
   
     <link rel="alternate" href="/atom.xml" title="明明如月" type="application/atom+xml">
   

@@ -7,28 +7,13 @@
   <title>PHP调用外部命令 —— 关于返回状态码 | 明明如月</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-    <meta name="author" content="明明如月">
+    <meta name="author" content="明明如月:chao507@vip.qq.com">
   
   
     <meta name="description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
 因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
 因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
   
-  <meta name="description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
-因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
-因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PHP调用外部命令 —— 关于返回状态码">
-<meta property="og:url" content="http://mmry.info/php-exec/">
-<meta property="og:site_name" content="明明如月">
-<meta property="og:description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
-因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
-因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP调用外部命令 —— 关于返回状态码">
-<meta name="twitter:description" content="最近有一个需求要写一个爬虫爬网页进行数据分析入库，主要是加航的机票信息抓取和分析，传送门。
-因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。
-因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方">
   
     <link rel="alternate" href="/atom.xml" title="明明如月" type="application/atom+xml">
   
