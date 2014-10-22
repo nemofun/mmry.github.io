@@ -23,6 +23,9 @@ ul,
 li {
   list-style: none;
 }
+code {
+  font-family: Monaco, Menlo, Consolas, Courier New, monospace;
+}
 #header {
   width: 750px;
   margin: 0 auto;
@@ -79,6 +82,40 @@ article {
   font-weight: 600;
   font-size: 12px;
 }
+.entry pre {
+  padding: 10px 20px;
+  background: #23241f;
+  color: #f8f8f2;
+  font-size: 0.8em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.entry blockquote {
+  margin: 0;
+  padding: 5px 2em;
+  font-style: italic;
+  background: #ccc;
+  background: rgba(0,0,0,0.06);
+  color: #222;
+}
+.entry img,
+.entry video {
+  max-width: 98%;
+  border-radius: 3px;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 0 8px #aaa;
+}
+.entry p code {
+  background: #eee;
+  color: #747070;
+  border: 1px solid #d6d6d6;
+  padding: 0 5px;
+  margin: 0 2px;
+  font-size: 90%;
+  white-space: nowrap;
+  text-shadow: 0 1px #fff;
+}
 .year {
   width: 60px;
   padding: 10px 0;
@@ -96,4 +133,62 @@ article {
 .month li time {
   font-size: 16px;
   margin-right: 25px;
+}
+pre .comment {
+  color: #666;
+}
+pre .title {
+  color: #a6e22e;
+}
+pre .variable,
+pre .attribute,
+pre .tag,
+pre .regexp,
+pre .ruby .constant,
+pre .xml .tag .title,
+pre .xml .pi,
+pre .xml .doctype,
+pre .html .doctype,
+pre .css .id,
+pre .css .class,
+pre .css .pseudo {
+  color: #f2777a;
+}
+pre .number,
+pre .preprocessor,
+pre .built_in,
+pre .literal,
+pre .params,
+pre .constant {
+  color: #66d9ef;
+}
+pre .class,
+pre .ruby .class .title,
+pre .css .rules .attribute {
+  color: #e6db74;
+}
+pre .string,
+pre .value,
+pre .inheritance,
+pre .header,
+pre .ruby .symbol,
+pre .xml .cdata {
+  color: #e6db74;
+}
+pre .css .hexcolor {
+  color: #6cc;
+}
+pre .function,
+pre .python .decorator,
+pre .python .title,
+pre .ruby .function .title,
+pre .ruby .title .keyword,
+pre .perl .sub,
+pre .javascript .title,
+pre .coffeescript .title {
+  color: #69c;
+}
+pre .keyword,
+pre .javascript .function {
+  color: #f92672;
 }

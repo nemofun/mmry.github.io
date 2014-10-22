@@ -32,7 +32,6 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <script src="/js/jquery.min.js"></script>
   <meta name="baidu-site-verification" content="SIyWHrnlr3" />
 </head>
 <body>
@@ -64,8 +63,7 @@
     '<span class="type">Referer</span>':'<span class="title">http</span>://<span class="title">music</span>.<span class="title">baidu</span>.<span class="title">com</span>/',
     '<span class="type">Accept</span>-<span class="type">Language</span>':'<span class="title">en</span>-<span class="type">US</span>,<span class="title">en</span>;<span class="title">q</span>=0.8,<span class="title">zh</span>-<span class="type">CN</span>;<span class="title">q</span>=0.6,<span class="title">zh</span>;<span class="title">q</span>=0.4,<span class="title">zh</span>-<span class="type">TW</span>;<span class="title">q</span>=0.2',
     '<span class="type">Cache</span>-<span class="type">Control</span>':'<span class="title">max</span>-<span class="title">age</span>=0',
-    '<span class="type">Connection</span>':'<span class="title">keep</span>-<span class="title">alive'</span>,
-    '<span class="type">Accept</span>':'<span class="title">text</span>/<span class="title">html</span>,<span class="title">application</span>/<span class="title">xhtml</span>+<span class="title">xml</span>,<span class="title">application</span>/<span class="title">xml</span>;<span class="title">q</span>=0.9,<span class="title">image</span>/<span class="title">webp</span>,*/*;<span class="title">q</span>=0.8'
+    '<span class="type">Connection</span>':'<span class="title">keep</span>-<span class="title">alive'</span>
 }</span></span>
 </code></pre><p>开始我想是否是对方的一些校验性规则在防止爬虫爬取，但是我觉得就算不能通过校验拒绝访问，这种情况应该是返回4x或5x状态码，不知为何会是导致程序报错。目前来说对于nodejs完全是应用成面上的了解，很多深入和核心的东西完全陌生，特此记录，留待以后验证。</p>
 
@@ -84,8 +82,8 @@
 	<div id="footer">
 	<p>© 2013-2014. All rights reserved.Our-love by <a href="http://mmry.info">mmry.info</a>,Power by <a href="http://hexo.io">hexo</a></p>
 </div>
-  	<script src="/js/main.js"></script>
-
+  	<script src="/js/jquery.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script type="text/javascript">
   var duoshuoQuery = { short_name: 'mmruy' };

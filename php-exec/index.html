@@ -36,7 +36,6 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <script src="/js/jquery.min.js"></script>
   <meta name="baidu-site-verification" content="SIyWHrnlr3" />
 </head>
 <body>
@@ -65,10 +64,8 @@
 <p>因为信息抓取量比较大，需要循环执行，考虑到nodejs在这方面的性能表现所以决定用它来完成。但是后面新需求，要求可在web页面上实时抓取更新，最终决定就在现有php环境的基础上通过调用外部命令的方式进行nodejs的实时调用。</p>
 <p>因为无需命令交互，只需要实时调用命令并且获取输出，这种情况采用php原生函数的方式无疑比较适合。PHP提供共了3个专门的执行外部命令的函数：<code>system()</code>，<code>exec()</code>，<code>passthru()</code>。这三个函数的用法大同小异，他们都可以获取命令执行的状态码，差别在于有无结果输出和输出方式上面，在此不一一列举。<br><a id="more"></a><br>在此想讨论的是php调用外部命令的权限问题以及nodejs的模块载入。</p>
 <p>通常情况下，在linux服务器环境下，执行php程序的用户组不会是root，基于选择的服务器或者配置的不同会有差异，比如笔者服务器上面是www这个用户，关于这一点，可以通过如下的php程序进行验证：</p>
-<pre><code><span class="php"><span class="preprocessor">&lt;?php</span>
-    exec(<span class="string">'id -a'</span>, <span class="variable">$res</span>, <span class="variable">$rc</span>);
-    print_r(<span class="variable">$res</span>);
-<span class="preprocessor">?&gt;</span></span>
+<pre><code><span class="keyword">exec</span>(<span class="string">'id -a'</span>, <span class="variable">$res</span>, <span class="variable">$rc</span>);
+print_r(<span class="variable">$res</span>);
 </code></pre><p>在浏览器运行即可看到当前执行php程序的用户的相关信息。那么我们在执行一个外部命令调用时如何判断是由于何种原因导致的执行失败呢，这时候就要用到状态码了。</p>
 <p>shell中每个命令都使用退出状态码（exit status）来告诉shell它完成了处理，退出状态码范围为[0,255]，命令结束运行时由命令传给shell，可以捕获并使用</p>
 <pre><code><span class="variable">$ </span>date aaaaaa
@@ -104,8 +101,8 @@
 	<div id="footer">
 	<p>© 2013-2014. All rights reserved.Our-love by <a href="http://mmry.info">mmry.info</a>,Power by <a href="http://hexo.io">hexo</a></p>
 </div>
-  	<script src="/js/main.js"></script>
-
+  	<script src="/js/jquery.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script type="text/javascript">
   var duoshuoQuery = { short_name: 'mmruy' };
